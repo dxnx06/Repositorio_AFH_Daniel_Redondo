@@ -3,14 +3,15 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Trabajo 1 - Mis Trabajos</title>
+    <title>Mis Trabajos - Asignatura</title>
     <style>
-        /* Copiar los mismos estilos del index.html */
         :root {
             --color-primary: #2563eb;
+            --color-primary-hover: #1d4ed8;
             --color-background: #f8fafc;
             --color-surface: #ffffff;
             --color-text: #1e293b;
+            --color-text-secondary: #64748b;
             --color-border: #e2e8f0;
         }
 
@@ -28,117 +29,247 @@
         }
 
         header {
-            background: var(--color-primary);
+            background: linear-gradient(135deg, var(--color-primary) 0%, var(--color-primary-hover) 100%);
             color: white;
-            padding: 2rem;
+            padding: 2.5rem 2rem;
             text-align: center;
-            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
         }
 
-        nav {
-            background: var(--color-surface);
-            padding: 1rem;
-            box-shadow: 0 1px 3px rgba(0,0,0,0.1);
-            position: sticky;
-            top: 0;
-        }
-
-        nav ul {
-            list-style: none;
-            display: flex;
-            justify-content: center;
-            gap: 2rem;
-            flex-wrap: wrap;
-        }
-
-        nav a {
-            color: var(--color-text);
-            text-decoration: none;
-            padding: 0.5rem 1rem;
-            border-radius: 6px;
-            transition: all 0.3s;
-            font-weight: 500;
-        }
-
-        nav a:hover {
-            background: var(--color-primary);
-            color: white;
+        header h1 {
+            font-size: 2.2rem;
+            margin-bottom: 0.5rem;
+            font-weight: 600;
         }
 
         .container {
-            max-width: 900px;
+            max-width: 1200px;
             margin: 2rem auto;
-            padding: 0 1rem;
+            padding: 0 1.5rem;
         }
 
-        .content {
+        .trabajos-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+            gap: 2rem;
+            margin-top: 2rem;
+        }
+
+        .trabajo-card {
             background: var(--color-surface);
             border-radius: 12px;
             padding: 2rem;
-            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
-            margin-top: 2rem;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+            transition: all 0.3s ease;
+            border: 1px solid var(--color-border);
         }
 
-        .content h2 {
+        .trabajo-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 16px rgba(0,0,0,0.12);
+        }
+
+        .trabajo-card h3 {
             color: var(--color-primary);
             margin-bottom: 1rem;
+            font-size: 1.4rem;
+            font-weight: 600;
         }
 
-        .content h3 {
-            margin-top: 2rem;
-            margin-bottom: 0.5rem;
+        .trabajo-card p {
+            color: var(--color-text-secondary);
+            margin-bottom: 1.5rem;
+            line-height: 1.6;
         }
 
-        .content p {
-            margin-bottom: 1rem;
+        .trabajo-info {
+            display: flex;
+            gap: 0.75rem;
+            margin-bottom: 1.5rem;
+            flex-wrap: wrap;
         }
 
-        .btn-back {
-            display: inline-block;
-            background: #6b7280;
+        .info-badge {
+            background: #f1f5f9;
+            padding: 0.4rem 0.8rem;
+            border-radius: 6px;
+            font-size: 0.85rem;
+            color: var(--color-text-secondary);
+        }
+
+        .btn-group {
+            display: flex;
+            gap: 0.75rem;
+        }
+
+        .btn {
+            flex: 1;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 0.5rem;
+            background: var(--color-primary);
             color: white;
-            padding: 0.75rem 1.5rem;
+            padding: 0.75rem 1.25rem;
             border-radius: 8px;
             text-decoration: none;
-            margin-top: 2rem;
+            transition: all 0.3s;
+            font-weight: 500;
+            border: none;
+            cursor: pointer;
+            font-size: 0.95rem;
         }
 
-        .btn-back:hover {
-            background: #4b5563;
+        .btn:hover {
+            background: var(--color-primary-hover);
+        }
+
+        .btn-secondary {
+            background: transparent;
+            color: var(--color-primary);
+            border: 2px solid var(--color-primary);
+        }
+
+        .btn-secondary:hover {
+            background: var(--color-primary);
+            color: white;
+        }
+
+        footer {
+            text-align: center;
+            padding: 2rem;
+            margin-top: 4rem;
+            color: var(--color-text-secondary);
+            border-top: 1px solid var(--color-border);
+        }
+
+        @media (max-width: 768px) {
+            header h1 {
+                font-size: 1.8rem;
+            }
+
+            .trabajos-grid {
+                grid-template-columns: 1fr;
+                gap: 1.5rem;
+            }
+
+            .btn-group {
+                flex-direction: column;
+            }
         }
     </style>
 </head>
 <body>
     <header>
-        <h1>📝 Trabajo 1</h1>
+        <h1>📚 Mis Trabajos de Asignatura</h1>
+        <p>Portafolio de trabajos realizados</p>
     </header>
 
-    <nav>
-        <ul>
-            <li><a href="index.html">🏠 Inicio</a></li>
-            <li><a href="trabajo1.html">📝 Trabajo 1</a></li>
-            <li><a href="trabajo2.html">📊 Trabajo 2</a></li>
-            <li><a href="trabajo3.html">🔬 Trabajo 3</a></li>
-        </ul>
-    </nav>
-
     <div class="container">
-        <div class="content">
-            <h2>Título del Trabajo 1</h2>
-            
-            <h3>Introducción</h3>
-            <p>Aquí va la introducción de tu trabajo...</p>
+        <div class="trabajos-grid">
+            <!-- Trabajo 1 - PDF -->
+            <div class="trabajo-card">
+                <h3>Montaje y Desmontaje de un Ordenador</h3>
+                <p>Guía completa sobre el proceso de montaje y desmontaje de un ordenador, incluyendo componentes y procedimientos.</p>
+                <div class="trabajo-info">
+                    <span class="info-badge">📄 PDF</span>
+                    <span class="info-badge">📅 Octubre 2025</span>
+                </div>
+                <div class="btn-group">
+                    <a href="Montaje-y-desmontaje-de-un-ordenador-AFH_compressed.pdf" target="_blank" class="btn">
+                        👁️ Ver PDF
+                    </a>
+                    <a href="Montaje-y-desmontaje-de-un-ordenador-AFH_compressed.pdf" download class="btn btn-secondary">
+                        ⬇️ Descargar
+                    </a>
+                </div>
+            </div>
 
-            <h3>Desarrollo</h3>
-            <p>Contenido principal del trabajo...</p>
+            <!-- Trabajo 2 - PDF -->
+            <div class="trabajo-card">
+                <h3>Montaje y Desmontaje de un Servidor</h3>
+                <p>Documentación detallada sobre el montaje y desmontaje de servidores y configuración de hardware.</p>
+                <div class="trabajo-info">
+                    <span class="info-badge">📄 PDF</span>
+                    <span class="info-badge">📅 Octubre 2025</span>
+                </div>
+                <div class="btn-group">
+                    <a href="Montaje y desmontaje de un servidor (2)_compressed.pdf" target="_blank" class="btn">
+                        👁️ Ver PDF
+                    </a>
+                    <a href="Montaje y desmontaje de un servidor (2)_compressed.pdf" download class="btn btn-secondary">
+                        ⬇️ Descargar
+                    </a>
+                </div>
+            </div>
 
-            <h3>Conclusiones</h3>
-            <p>Conclusiones finales...</p>
+            <!-- Trabajo 3 - PDF -->
+            <div class="trabajo-card">
+                <h3>Servidor de IA</h3>
+                <p>Proyecto sobre implementación y configuración de un servidor dedicado para aplicaciones de Inteligencia Artificial.</p>
+                <div class="trabajo-info">
+                    <span class="info-badge">📄 PDF</span>
+                    <span class="info-badge">📅 Noviembre 2025</span>
+                </div>
+                <div class="btn-group">
+                    <a href="ServidordeIacomprimido.pdf.pdf" target="_blank" class="btn">
+                        👁️ Ver PDF
+                    </a>
+                    <a href="ServidordeIacomprimido.pdf.pdf" download class="btn btn-secondary">
+                        ⬇️ Descargar
+                    </a>
+                </div>
+            </div>
 
-            <a href="index.html" class="btn-back">← Volver al Inicio</a>
+            <!-- Trabajo 4 - HTML -->
+            <div class="trabajo-card">
+                <h3>Trabajo 4</h3>
+                <p>Descripción del cuarto trabajo. Página HTML con contenido personalizado.</p>
+                <div class="trabajo-info">
+                    <span class="info-badge">🌐 HTML</span>
+                    <span class="info-badge">📅 Diciembre 2025</span>
+                </div>
+                <div class="btn-group">
+                    <a href="trabajo4.html" class="btn">
+                        👁️ Ver Trabajo
+                    </a>
+                </div>
+            </div>
+
+            <!-- Trabajo 5 - HTML -->
+            <div class="trabajo-card">
+                <h3>Trabajo 5</h3>
+                <p>Descripción del quinto trabajo. Página HTML con contenido personalizado.</p>
+                <div class="trabajo-info">
+                    <span class="info-badge">🌐 HTML</span>
+                    <span class="info-badge">📅 Enero 2026</span>
+                </div>
+                <div class="btn-group">
+                    <a href="trabajo5.html" class="btn">
+                        👁️ Ver Trabajo
+                    </a>
+                </div>
+            </div>
+
+            <!-- Trabajo 6 - HTML -->
+            <div class="trabajo-card">
+                <h3>Trabajo 6</h3>
+                <p>Descripción del sexto trabajo. Página HTML con contenido personalizado.</p>
+                <div class="trabajo-info">
+                    <span class="info-badge">🌐 HTML</span>
+                    <span class="info-badge">📅 Febrero 2026</span>
+                </div>
+                <div class="btn-group">
+                    <a href="trabajo6.html" class="btn">
+                        👁️ Ver Trabajo
+                    </a>
+                </div>
+            </div>
         </div>
     </div>
+
+    <footer>
+        <p>&copy; 2025 - Mis Trabajos Académicos</p>
+    </footer>
 </body>
 </html>
-
-
