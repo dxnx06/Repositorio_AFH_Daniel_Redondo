@@ -3,8 +3,9 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Mis Trabajos - Asignatura</title>
+    <title>Trabajo 1 - Mis Trabajos</title>
     <style>
+        /* Copiar los mismos estilos del index.html */
         :root {
             --color-primary: #2563eb;
             --color-background: #f8fafc;
@@ -34,18 +35,12 @@
             box-shadow: 0 2px 4px rgba(0,0,0,0.1);
         }
 
-        header h1 {
-            font-size: 2rem;
-            margin-bottom: 0.5rem;
-        }
-
         nav {
             background: var(--color-surface);
             padding: 1rem;
             box-shadow: 0 1px 3px rgba(0,0,0,0.1);
             position: sticky;
             top: 0;
-            z-index: 100;
         }
 
         nav ul {
@@ -71,109 +66,79 @@
         }
 
         .container {
-            max-width: 1200px;
+            max-width: 900px;
             margin: 2rem auto;
             padding: 0 1rem;
         }
 
-        .trabajos-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            gap: 2rem;
-            margin-top: 2rem;
-        }
-
-        .trabajo-card {
+        .content {
             background: var(--color-surface);
             border-radius: 12px;
             padding: 2rem;
             box-shadow: 0 2px 8px rgba(0,0,0,0.1);
-            transition: transform 0.3s, box-shadow 0.3s;
+            margin-top: 2rem;
         }
 
-        .trabajo-card:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 4px 12px rgba(0,0,0,0.15);
-        }
-
-        .trabajo-card h3 {
+        .content h2 {
             color: var(--color-primary);
             margin-bottom: 1rem;
-            font-size: 1.5rem;
         }
 
-        .trabajo-card p {
-            color: #64748b;
-            margin-bottom: 1.5rem;
+        .content h3 {
+            margin-top: 2rem;
+            margin-bottom: 0.5rem;
         }
 
-        .btn {
+        .content p {
+            margin-bottom: 1rem;
+        }
+
+        .btn-back {
             display: inline-block;
-            background: var(--color-primary);
+            background: #6b7280;
             color: white;
             padding: 0.75rem 1.5rem;
             border-radius: 8px;
             text-decoration: none;
-            transition: background 0.3s;
-            font-weight: 500;
+            margin-top: 2rem;
         }
 
-        .btn:hover {
-            background: #1d4ed8;
-        }
-
-        footer {
-            background: var(--color-surface);
-            text-align: center;
-            padding: 2rem;
-            margin-top: 4rem;
-            border-top: 1px solid var(--color-border);
+        .btn-back:hover {
+            background: #4b5563;
         }
     </style>
 </head>
 <body>
     <header>
-        <h1>📚 Mis Trabajos de Asignatura</h1>
-        <p>Recopilación de proyectos y tareas</p>
+        <h1>📝 Trabajo 1</h1>
     </header>
 
     <nav>
         <ul>
             <li><a href="index.html">🏠 Inicio</a></li>
-            <li><a href="trabajo1.pdf">📝 </a></li>
-            <li><a href="trabajo2.l">📊 Trabajo 2</a></li>
-            <li><a href="trabajo3.html">🔬 Servidor de Ia</a></li>
+            <li><a href="trabajo1.html">📝 Trabajo 1</a></li>
+            <li><a href="trabajo2.html">📊 Trabajo 2</a></li>
+            <li><a href="trabajo3.html">🔬 Trabajo 3</a></li>
         </ul>
     </nav>
 
     <div class="container">
-        <h2>Bienvenido a mi Portafolio Académico</h2>
-        <p>Aquí encontrarás todos los trabajos realizados durante el curso.</p>
+        <div class="content">
+            <h2>Título del Trabajo 1</h2>
+            
+            <h3>Introducción</h3>
+            <p>Aquí va la introducción de tu trabajo...</p>
 
-        <div class="trabajos-grid">
-            <div class="trabajo-card">
-                <h3>Trabajo 1</h3>
-                <p>Descripción breve del primer trabajo o proyecto realizado.</p>
-                <a href="trabajo1.html" class="btn">Ver Trabajo →</a>
-            </div>
+            <h3>Desarrollo</h3>
+            <p>Contenido principal del trabajo...</p>
 
-            <div class="trabajo-card">
-                <h3>Trabajo 2</h3>
-                <p>Descripción breve del segundo trabajo o proyecto realizado.</p>
-                <a href="trabajo2.html" class="btn">Ver Trabajo →</a>
-            </div>
+            <h3>Conclusiones</h3>
+            <p>Conclusiones finales...</p>
 
-            <div class="trabajo-card">
-                <h3>Trabajo 3</h3>
-                <p>Descripción breve del tercer trabajo o proyecto realizado.</p>
-                <a href="ServidordeIacomprimido.pdf" class="btn">Ver Trabajo →</a>
-            </div>
+            <a href="index.html" class="btn-back">← Volver al Inicio</a>
         </div>
     </div>
-
-    <footer>
-        <p>&copy; 2025 - Mis Trabajos Académicos</p>
-    </footer>
 </body>
 </html>
+
 
