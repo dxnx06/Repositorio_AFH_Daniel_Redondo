@@ -1,0 +1,511 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Acceso Remoto - Daniel Redondo Olmos</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Georgia', 'Times New Roman', serif;
+            line-height: 1.6;
+            color: #2c2c2c;
+            background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+            min-height: 100vh;
+        }
+
+        .portada {
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            position: relative;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            margin-bottom: 2rem;
+        }
+
+        .portada::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1000 1000"><polygon fill="rgba(255,255,255,0.1)" points="0,1000 1000,0 1000,1000"/></svg>');
+            pointer-events: none;
+        }
+
+        .portada-content {
+            position: relative;
+            z-index: 2;
+            max-width: 800px;
+            padding: 2rem;
+        }
+
+        .portada h1 {
+            font-size: 3.5rem;
+            margin-bottom: 1rem;
+            font-weight: 300;
+            letter-spacing: 2px;
+        }
+
+        .portada h2 {
+            font-size: 2rem;
+            margin-bottom: 2rem;
+            opacity: 0.9;
+            font-weight: 400;
+        }
+
+        .autor {
+            font-size: 1.5rem;
+            margin-bottom: 3rem;
+            opacity: 0.8;
+            font-style: italic;
+        }
+
+        .decorativo {
+            font-size: 4rem;
+            margin: 2rem 0;
+            opacity: 0.7;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 2rem;
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            border-radius: 15px;
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
+            margin-bottom: 2rem;
+        }
+
+        .indice {
+            background: linear-gradient(135deg, #e3f2fd 0%, #bbdefb 100%);
+            padding: 2rem;
+            border-radius: 10px;
+            margin-bottom: 3rem;
+            border-left: 5px solid #2196f3;
+        }
+
+        .indice h2 {
+            color: #1976d2;
+            margin-bottom: 1.5rem;
+            font-size: 2rem;
+            text-align: center;
+        }
+
+        .indice-lista {
+            list-style: none;
+            padding: 0;
+        }
+
+        .indice-lista li {
+            margin: 1rem 0;
+            padding: 0.75rem 1rem;
+            background: rgba(255, 255, 255, 0.8);
+            border-radius: 8px;
+            transition: all 0.3s ease;
+        }
+
+        .indice-lista li:hover {
+            background: rgba(255, 255, 255, 1);
+            transform: translateX(10px);
+            box-shadow: 0 4px 12px rgba(33, 150, 243, 0.3);
+        }
+
+        .indice-lista a {
+            text-decoration: none;
+            color: #1976d2;
+            font-weight: 500;
+            font-size: 1.2rem;
+            display: block;
+        }
+
+        .seccion {
+            margin: 3rem 0;
+            padding: 2rem 0;
+        }
+
+        .seccion h2 {
+            color: #1976d2;
+            font-size: 2.2rem;
+            margin-bottom: 2rem;
+            padding-bottom: 0.5rem;
+            border-bottom: 3px solid #e3f2fd;
+        }
+
+        .seccion h3 {
+            color: #424242;
+            font-size: 1.5rem;
+            margin: 1.5rem 0 1rem 0;
+        }
+
+        .seccion p {
+            margin-bottom: 1.5rem;
+            font-size: 1.1rem;
+            text-align: justify;
+        }
+
+        .codigo {
+            background: #2d3748;
+            color: #e2e8f0;
+            padding: 1rem;
+            border-radius: 8px;
+            font-family: 'Courier New', monospace;
+            margin: 1rem 0;
+            overflow-x: auto;
+            border-left: 4px solid #4299e1;
+        }
+
+        .imagen-placeholder {
+            background: linear-gradient(135deg, #f0f4f8 0%, #d6e9f5 100%);
+            border: 2px dashed #90cdf4;
+            border-radius: 12px;
+            padding: 3rem 2rem;
+            margin: 2rem 0;
+            text-align: center;
+            color: #4a5568;
+            font-size: 1.2rem;
+            font-weight: 500;
+        }
+
+        .lista {
+            margin: 1rem 0;
+            padding-left: 2rem;
+        }
+
+        .lista li {
+            margin: 0.5rem 0;
+            font-size: 1.1rem;
+        }
+
+        .destacado {
+            background: linear-gradient(135deg, #fff3cd 0%, #ffeaa7 100%);
+            padding: 1.5rem;
+            border-radius: 8px;
+            margin: 1.5rem 0;
+            border-left: 4px solid #f39c12;
+        }
+
+        @media (max-width: 768px) {
+            .portada h1 {
+                font-size: 2.5rem;
+            }
+            
+            .portada h2 {
+                font-size: 1.5rem;
+            }
+            
+            .container {
+                margin: 1rem;
+                padding: 1rem;
+            }
+        }
+
+        .foto-numero {
+            background: #3498db;
+            color: white;
+            padding: 0.5rem 1rem;
+            border-radius: 20px;
+            font-weight: bold;
+            display: inline-block;
+            margin-bottom: 1rem;
+        }
+    </style>
+</head>
+<body>
+    <!-- PORTADA -->
+    <div class="portada">
+        <div class="portada-content">
+            <div class="decorativo">🔐</div>
+            <h1>ACCESO REMOTO</h1>
+            <h2>Práctica de Administración de Sistemas</h2>
+            <div class="autor">Daniel Redondo Olmos</div>
+            <div class="decorativo">💻 🌐 📱</div>
+        </div>
+    </div>
+
+    <div class="container">
+        <!-- ÍNDICE -->
+        <div class="indice">
+            <h2>📋 ÍNDICE DE CONTENIDOS</h2>
+            <ul class="indice-lista">
+                <li><a href="#seccion1">1. Instalar un servidor SSH en Linux</a></li>
+                <li><a href="#seccion2">2. Conexión de escritorio remoto en Windows (RDP)</a></li>
+                <li><a href="#seccion3">3. Instalación y uso de TeamViewer</a></li>
+            </ul>
+        </div>
+
+        <!-- SECCIÓN 1: SSH -->
+        <section id="seccion1" class="seccion">
+            <h2>1. Instalar un servidor SSH en Linux</h2>
+            
+            <p>Lo primero que hay que hacer es actualizar el sistema y luego instalar el servidor SSH en Ubuntu Server:</p>
+
+            <div class="codigo">sudo apt update
+sudo apt upgrade</div>
+
+            <p>Después tenemos que utilizar el comando para instalar el servidor SSH:</p>
+
+            <div class="codigo">sudo apt install openssh-server</div>
+
+            <div class="imagen-placeholder">
+                <div class="foto-numero">Foto 1</div>
+                <p>Captura de la instalación de OpenSSH Server mostrando la salida del comando en terminal</p>
+            </div>
+
+            <div class="codigo">smr@ubuntuserver:~$ sudo apt install openssh-server
+Reading package lists... Done
+Building dependency tree
+Reading state information... Done
+openssh-server is already the newest version (1:8.2p1-4ubuntu0.13).
+The following packages were automatically installed and are no longer required:
+libfwupdplugin1 libxmlb1
+Use 'sudo apt autoremove' to remove them.
+0 upgraded, 0 newly installed, 0 to remove and O not upgraded.
+smr@ubuntuserver:~$</div>
+
+            <h3>Configuración del puerto SSH</h3>
+            <p>Ahora tenemos que ver el puerto al que se asocia SSH, ya que lo vamos a necesitar para el acceso remoto:</p>
+
+            <div class="codigo">sudo nano /etc/ssh/sshd_config</div>
+
+            <div class="imagen-placeholder">
+                <div class="foto-numero">Foto 2</div>
+                <p>Archivo de configuración sshd_config abierto en el editor nano mostrando las opciones de configuración</p>
+            </div>
+
+            <h3>Verificar el estado del servicio SSH</h3>
+            <p>Para verificar si está funcionando el servicio SSH tendremos que usar el siguiente comando:</p>
+
+            <div class="codigo">sudo systemctl status ssh</div>
+
+            <div class="imagen-placeholder">
+                <div class="foto-numero">Foto 3</div>
+                <p>Estado del servicio SSH mostrando que está activo y funcionando en el puerto 22</p>
+            </div>
+
+            <div class="codigo">smr@ubuntuserver:~$ sudo systemctl restart ssh
+smr@ubuntuserver:~$ sudo systemctl status ssh
+ssh.service - OpenBSD Secure Shell server
+Loaded: loaded (/lib/systemd/system/ssh.service; enabled; vendor preset: enabled)
+Active: active (running) since Wed 2025-10-29 19:53:53 UTC; 43s ago
+Docs: man:sshd(8)
+man:sshd_config (5)
+Main PID: 1847 (sshd)
+Tasks: 1 (limit: 1041)
+Memory: 1.2M
+CGroup: /system.slice/ssh.service
+1847 sshd: /usr/sbin/sshd -D [listener) 0 of 10-100 startups</div>
+
+            <h3>Configurar el firewall</h3>
+            <p>También podemos activar el firewall con los siguientes comandos:</p>
+
+            <div class="codigo">sudo ufw enable
+sudo ufw allow ssh</div>
+
+            <div class="imagen-placeholder">
+                <div class="foto-numero">Foto 4</div>
+                <p>Activación del firewall UFW y configuración para permitir conexiones SSH</p>
+            </div>
+
+            <h3>Descargar e instalar PuTTY</h3>
+            <p>Buscamos PuTTY en el navegador y seleccionamos la versión que queremos instalar, ejecutamos y terminamos la instalación.</p>
+
+            <div class="imagen-placeholder">
+                <div class="foto-numero">Foto 5</div>
+                <p>Página de descarga de PuTTY mostrando las diferentes versiones disponibles (64-bit, 32-bit, ARM)</p>
+            </div>
+
+            <h3>Configurar PuTTY</h3>
+            <p>Cuando ya lo tenemos abierto, aquí tenemos que marcar la opción SSH, el puerto que está asociado a SSH en el servidor (puerto 22) y la IP del servidor.</p>
+
+            <div class="imagen-placeholder">
+                <div class="foto-numero">Foto 6</div>
+                <p>Ventana de configuración de PuTTY mostrando las opciones de conexión SSH, puerto 22 y campo para la dirección IP</p>
+            </div>
+
+            <div class="destacado">
+                <h4>❓ ¿Cómo se podría conectar un usuario sin tener que meter la contraseña cada vez que se conecta?</h4>
+                <p>Se puede configurar autenticación por llaves SSH o guardar las credenciales en el cliente.</p>
+            </div>
+
+            <div class="imagen-placeholder">
+                <div class="foto-numero">Foto 7</div>
+                <p>Terminal de PuTTY conectado exitosamente al servidor Ubuntu mostrando el prompt de usuario</p>
+            </div>
+
+            <p>Cuando ya hemos metido nuestro usuario y contraseña nos cargará la máquina virtual de forma remota y podremos ver nuestro Ubuntu a través del programa PuTTY que hemos instalado en una máquina virtual de Windows.</p>
+        </section>
+
+        <!-- SECCIÓN 2: RDP -->
+        <section id="seccion2" class="seccion">
+            <h2>2. Conexión de escritorio remoto en Windows (RDP)</h2>
+            
+            <h3>Cómo habilitar el escritorio remoto</h3>
+            <ul class="lista">
+                <li>Ve a Inicio luego a Configuración y posteriormente ve a Sistema.</li>
+                <li>Selecciona "Escritorio remoto".</li>
+                <li>Activa el interruptor "Habilitar Escritorio remoto".</li>
+                <li>Confirma la activación cuando se te pida.</li>
+                <li>Solo los usuarios autorizados podrán conectarse. Puedes agregar otros en "Usuarios autorizados de escritorio remoto".</li>
+            </ul>
+
+            <div class="imagen-placeholder">
+                <div class="foto-numero">Foto 8</div>
+                <p>Pantalla de configuración de Windows mostrando las opciones de Escritorio Remoto</p>
+            </div>
+
+            <div class="imagen-placeholder">
+                <div class="foto-numero">Foto 9</div>
+                <p>Ventana de configuración de usuarios autorizados para escritorio remoto</p>
+            </div>
+        </section>
+
+        <!-- SECCIÓN 3: TEAMVIEWER -->
+        <section id="seccion3" class="seccion">
+            <h2>3. Instalación y uso de TeamViewer</h2>
+            
+            <h3>Instalación en Windows</h3>
+            <p>Tienes que descargar TeamViewer desde la página oficial. Para ello tienes que iniciar el proceso de instalación.</p>
+
+            <div class="imagen-placeholder">
+                <div class="foto-numero">Foto 10</div>
+                <p>Ventana inicial de instalación de TeamViewer con opciones de configuración</p>
+            </div>
+
+            <div class="imagen-placeholder">
+                <div class="foto-numero">Foto 11</div>
+                <p>Proceso de instalación de TeamViewer en progreso</p>
+            </div>
+
+            <div class="imagen-placeholder">
+                <div class="foto-numero">Foto 12</div>
+                <p>Acuerdo de licencia de TeamViewer</p>
+            </div>
+
+            <div class="imagen-placeholder">
+                <div class="foto-numero">Foto 13</div>
+                <p>Ventana principal de TeamViewer mostrando el ID y contraseña para conexiones remotas</p>
+            </div>
+
+            <div class="imagen-placeholder">
+                <div class="foto-numero">Foto 14</div>
+                <p>Interfaz principal de TeamViewer con opciones de soporte remoto y configuración</p>
+            </div>
+
+            <h3>Instalación en dispositivo móvil</h3>
+            <p><strong>Paso 1:</strong> Instalar TeamViewer en móvil, para esto tienes que buscar TeamViewer en Play Store si tenemos un móvil Android (en mi caso).</p>
+
+            <div class="imagen-placeholder">
+                <div class="foto-numero">Foto 15</div>
+                <p>TeamViewer en Google Play Store listo para instalar</p>
+            </div>
+
+            <p>Después tienes que iniciar sesión y la pantalla que encontrarás será esta:</p>
+
+            <div class="imagen-placeholder">
+                <div class="foto-numero">Foto 16</div>
+                <p>Interfaz de TeamViewer en dispositivo móvil tras la instalación</p>
+            </div>
+
+            <h3>Conexión Windows - Móvil</h3>
+            <p>Para empezar la conexión tendremos que meternos en TeamViewer en el móvil, después pinchamos en introducir ID de interlocutor.</p>
+
+            <div class="imagen-placeholder">
+                <div class="foto-numero">Foto 17</div>
+                <p>Campo para introducir ID de interlocutor en la app móvil de TeamViewer</p>
+            </div>
+
+            <p>Después tienes que introducir el ID que te dan nada más iniciar el TeamViewer en Windows. Y seguido de esto pinchamos en conectar. También te pedirá la contraseña.</p>
+
+            <div class="imagen-placeholder">
+                <div class="foto-numero">Foto 18</div>
+                <p>Pantalla de conexión establecida desde móvil a PC Windows</p>
+            </div>
+
+            <p>En la siguiente pantalla podemos ver el móvil conectado a nuestro dispositivo Windows a través del TeamViewer, abajo se puede ver una barra de tareas con distintas opciones para TeamViewer.</p>
+
+            <h4>Opciones disponibles:</h4>
+            
+            <div class="imagen-placeholder">
+                <div class="foto-numero">Foto 19</div>
+                <p>Teclado virtual de TeamViewer en dispositivo móvil</p>
+            </div>
+
+            <div class="imagen-placeholder">
+                <div class="foto-numero">Foto 20</div>
+                <p>Opciones de atajos de TeamViewer en la interfaz móvil</p>
+            </div>
+
+            <h4>Datos importantes:</h4>
+            <p>Al iniciar la conexión aparece lo siguiente en la parte de abajo a la izquierda en el dispositivo al que te conectas, aquí se puede ver el nombre de la persona que se conecta.</p>
+
+            <div class="imagen-placeholder">
+                <div class="foto-numero">Foto 21</div>
+                <p>Notificación de conexión entrante mostrando el nombre del usuario conectado</p>
+            </div>
+
+            <div class="imagen-placeholder">
+                <div class="foto-numero">Foto 22</div>
+                <p>Mensaje de TeamViewer ofreciendo la opción de cerrar la conexión desde el dispositivo host</p>
+            </div>
+
+            <h3>Conectar en modo presentación y ver las opciones disponibles</h3>
+            
+            <h4>Iniciar una reunión</h4>
+            <p>Para conectarnos en Windows a una reunión o modo presentación tenemos que ir a la parte de más soluciones y nos aparecerá Reunión.</p>
+
+            <div class="imagen-placeholder">
+                <div class="foto-numero">Foto 23</div>
+                <p>Menú de TeamViewer mostrando la opción de Reunión en "Más soluciones"</p>
+            </div>
+
+            <p>Nos saldrá esto y pincharemos empezar.</p>
+
+            <div class="imagen-placeholder">
+                <div class="foto-numero">Foto 24</div>
+                <p>Ventana de TeamViewer Meeting con opciones para unirse o crear una nueva sesión</p>
+            </div>
+
+            <div class="imagen-placeholder">
+                <div class="foto-numero">Foto 25</div>
+                <p>Vista previa de reunión de TeamViewer mostrando opciones de vídeo y audio</p>
+            </div>
+
+            <h4>Conectarse a una reunión desde el móvil</h4>
+            <p>Tienes que compartir la clave y la contraseña de la reunión por correo electrónico por ejemplo, yo lo he hecho por correo.</p>
+
+            <div class="imagen-placeholder">
+                <div class="foto-numero">Foto 26</div>
+                <p>Opciones para compartir los datos de la reunión por correo electrónico</p>
+            </div>
+
+            <p>Aquí te muestro la opción de compartir pantalla.</p>
+
+            <div class="imagen-placeholder">
+                <div class="foto-numero">Foto 27</div>
+                <p>Panel de opciones de compartir pantalla en TeamViewer Meeting</p>
+            </div>
+
+            <p><strong>Compartir pantalla:</strong> Seleccionar pantalla - No hay ninguna pantalla compartida - COMPARTIR MI PANTALLA</p>
+
+            <p>De esta forma puedes compartir pantalla con todo el mundo que se una a ti. También se puede hacer videoconferencias.</p>
+
+            <div class="imagen-placeholder">
+                <div class="foto-numero">Foto 28</div>
+                <p>Interfaz de videoconferencia de TeamViewer con Daniel Redondo Olmos conectado</p>
+            </div>
+        </section>
+    </div>
+</body>
+</html>
